@@ -5,7 +5,7 @@ window.trolley = {
     lang: 'ru_RU'
 }
 
-fetch('/fileindex.json')
+fetch('fileindex.json')
     .then(response => {
         if (!response.ok) {
         throw new Error('Network response was not ok');
