@@ -3,10 +3,9 @@ nr.defineComponent({
     template: `
         <div id="languageSelector"></div>
         <div id="mapSelector"></div>
+        <div id="mapDisplay"></div>
         <hr>
         <div id="routeInput"></div>
-        <hr>
-        <div id="mapDisplay"></div>
     `,
     beforeCreate: function () {
         return { 
@@ -19,8 +18,8 @@ nr.defineComponent({
     afterCreate: function () {
         nr.mount('languageSelector', '#languageSelector')
         nr.mount('mapSelector', '#mapSelector')
-        nr.mount('routeInput', '#routeInput')
         nr.mount('mapDisplay', '#mapDisplay')
+        nr.mount('routeInput', '#routeInput')
     }
 })
 
@@ -38,15 +37,16 @@ nr.defineComponent({
             }
         }
     },
-    afterCreate: function () {
+    afterCreate: async function () {
         const lr = document.querySelector('#languageSelector ul')
+        
         window.trolley.fileindex.languages.forEach((l) => {
-            //lr.innerHTML += `<li class="list-group-item">${JSON.stringify(l)}</li>`
             const li = document.createElement('button')
             li.innerHTML = `<span>${l.name}</span> <span class="fw-bold">${l.code}</span>`
             li.className = 'list-group-item w-100 d-flex justify-content-between'
             li.addEventListener('click', () => {
                 window.trolley.lang = l.code
+                window.trolley.updateLocales()
                 const mcl = nr.mountedComponents
                 for (const s in mcl) {
                     if (mcl.hasOwnProperty(s)) {
@@ -81,7 +81,6 @@ nr.defineComponent({
     afterCreate: function () {
         const lr = document.querySelector('#mapSelector ul')
         window.trolley.fileindex.maps.forEach((m) => {
-            //lr.innerHTML += `<li class="list-group-item">${JSON.stringify(l)}</li>`
             fetch(m.meta)
                 .then(response => {
                     if (!response.ok) {
@@ -98,6 +97,7 @@ nr.defineComponent({
                     const mapname = map.name
                     li.innerHTML = `<span>${mapname}</span> <span class="fw-bold">${data.country}/${data.city}</span>`
                     li.className = 'list-group-item w-100 d-flex justify-content-between'
+                    if (window.trolley.mapmeta.mapid == data.mapid) li.classList.add('active')
                     li.addEventListener('click', () => {
                         fetch(m.file)
                             .then(response => {
@@ -108,6 +108,8 @@ nr.defineComponent({
                             })
                             .then(mdata => {
                                 window.trolley.map = mdata
+                                window.trolley.mapmeta = data
+                                nr.remount('#mapSelector', 'mapSelector')
                                 nr.remount('#routeInput', 'routeInput')
                                 nr.remount('#mapDisplay', 'mapDisplay')
                             })
@@ -123,14 +125,15 @@ nr.defineComponent({
 nr.defineComponent({
     name: "routeInput",
     template: `
-        <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputFrom" placeholder="Откуда?">
-        <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputTo" placeholder="Куда?">
-        <datalist id="mapStationsDatalist"></datalist>
-        <div style="margin-left: auto;" class="d-flex gap-2">
-            <button id="routeInput-filters" class="btn btn-outline-secondary" disabled>Фильтры</button>
-            <button id="routeInput-search" class="btn btn-primary">Найти путь</button>
-        </div>
+        <div id="routeInput-form">
+            <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputFrom" disabled placeholder="---">
+            <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputTo" disabled placeholder="---">
+            <div style="margin-left: auto;" class="d-flex gap-2">
+                <button id="routeInputFilters" class="btn btn-outline-secondary" disabled>---</button>
+                <button id="routeInputRouteme" class="btn btn-primary">---</button>
+            </div>
 
+        </div>
         <div id="routeInput-display"></div>
     `,
     beforeCreate: function () {
@@ -141,31 +144,27 @@ nr.defineComponent({
             }
         }
     },
-    afterCreate: function () {
-        if (!window.trolley.map) return
-        const dl = document.getElementById('mapStationsDatalist')
-        window.trolley.map.lines.forEach(l => {
-            l.stations.forEach(s => {
-                const dlo = document.createElement('option')
-                dlo.value = `${l.name} (${l.id}) -> ${s.name}`
-                dlo.setAttribute('trolley-data-id', s.id)
-                dl.appendChild(dlo)
-            })
-        })
-        document.getElementById('routeInput-search').addEventListener('click', () => {
-            const i = {
-                f: document.getElementById('routeInputFrom'),
-                t:document.getElementById('routeInputTo')
+    afterCreate: async function () {
+        const roots = {
+            inputFrom: document.querySelector('#routeInputFrom'),
+            inputTo: document.querySelector('#routeInputTo'),
+            filters: document.querySelector('#routeInputFilters'),
+            routeme: document.querySelector('#routeInputRouteme')
+        }
+
+        while (true) {
+            if (window.trolley && window.trolley.locales && Object.keys(window.trolley.locales).length > 0) {
+                console.info('[routeInput] Locales loaded')
+                break
             }
-            
-            const fromId = Array.from(dl.options).find(o => o.value === i.f.value).getAttribute('trolley-data-id')
-            const toId = Array.from(dl.options).find(o => o.value === i.t.value).getAttribute('trolley-data-id')
-            let out = 'Похоже, вы не правильно ввели путь.'
-            if (toId && fromId) {
-                out = `${fromId} -> ${toId}`
-            }
-            document.getElementById('routeInput-display').innerHTML = out
-        })
+            console.warn('[routeInput] Waiting for locales!')
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
+        roots.inputFrom.placeholder = window.trolley.locales.ROUTEINPUT_FROM
+        roots.inputTo.placeholder = window.trolley.locales.ROUTEINPUT_TO
+        roots.filters.textContent = window.trolley.locales.ROUTEINPUT_FILTERS_BUTTON
+        roots.routeme.textContent = window.trolley.locales.ROUTEINPUT_ROUTEME_BUTTON
     }
 })
 
@@ -183,15 +182,21 @@ nr.defineComponent({
                         <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#mapDisplay-line${i}">${l.name} (${l.id})</button>
                     </h2>
                     <div id="mapDisplay-line${i}" class="accordion-collapse collapse">
-                        ${l.stations.map((s) => {
-                            return `
-                                <div class="d-flex w-100 p-1 px-2">
-                                    <i class="bi bi-geo"></i>
-                                    <span>${s.name}</span>
-                                    <span style="margin-left: auto;">${s.id}</span>
-                                </div>
-                            `
-                        }).join('')}
+                        <ul class="list-group list-group-flush">
+                            ${l.stations.map((s) => {
+                                return `
+                                    <li class="list-group-item d-flex w-100 align-items-center">
+                                        <i class="bi bi-geo-alt me-3"></i>
+                                        <span>${s.name}</span>
+                                        <div style="margin-left: auto;" class="d-flex gap-2 align-items-center">
+                                            <span style="transform: scale(0.75)">${s.id}</span>
+                                            <a class="btn btn-primary btn-sm" href="#routeInput-form"><i class="bi bi-crosshair"></i></a>
+                                            <a class="btn btn-secondary btn-sm" href="#routeInput-form"><i class="bi bi-geo"></i></a>
+                                        </div>
+                                    </li>
+                                `
+                            }).join('')}
+                        </ul>
                     </div>
                 </div>
             `
