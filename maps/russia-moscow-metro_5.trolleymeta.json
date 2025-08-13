@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "mapname": [
+        { "language": "en_US", "name": "Moscow Metro" },
+        { "language": "ru_RU", "name": "МосМетро"}
+    ],
+    "mainlang": "ru_RU",
+    "country": "Россия",
+    "city": "Москва",
+    "type": "metro",
+    "open": { "from": "05:30", "to": "01:00" },
+    "authors": [ "Sk1rri" ],
+    "description": "Карта Московского метро для Trolley, основанная на карте МосМетро 5.3 от МЦД",
+    "warnings": [ "В карте отсуствуют Диаметры D1, D2, D3, D4 и D4а. Это решение для проблем которые они с собой несут." ],
+    "mapsrc": [
+        "https://news.metro.ru/24/wagons-map-v5.3_02.pdf",
+        "https://yandex.ru/metro/moscow",
+        "https://duck.ai"
+    ],
+    "date": "08/11/2025",
+    "license": "CC-BY"
+}

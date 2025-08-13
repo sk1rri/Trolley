@@ -1,0 +1,20 @@
+{
+    "languages": [
+        {
+            "code": "ru_RU",
+            "name": "Русский",
+            "file": "/languages/ru_RU.json"
+        },
+        {
+            "code": "en_US",
+            "name": "English",
+            "file": "/languages/en_US.json"
+        }
+    ],
+    "maps": [
+        {
+            "meta": "/maps/russia-moscow-metro_5.trolleymeta.json",
+            "file": "/maps/russia-moscow-metro_5.trolleymap.json"
+        }
+    ]
+}
