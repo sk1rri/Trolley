@@ -118,8 +118,7 @@
 				{ "type": "station", "name": "Краснопресненская", "id": "5-8" },
 				{ "type": "station", "name": "Белорусская", "id": "5-9" },
 				{ "type": "station", "name": "Новослободская", "id": "5-10" },
-				{ "type": "station", "name": "Проспект Мира", "id": "5-11" },
-				{ "type": "loopover" }
+				{ "type": "station", "name": "Проспект Мира", "id": "5-11" }
 			]
 		},
 		{ "name": "Калужско-Рижская", "id": "6", "color": "e28529",
@@ -295,8 +294,7 @@
 				{ "type": "station", "name": "Сокольники", "id": "11-26" },
 				{ "type": "station", "name": "Электрозаводская", "id": "11-27" },
 				{ "type": "station", "name": "Лефортово", "id": "11-28" },
-				{ "type": "station", "name": "Авиамоторная", "id": "11-29" },
-				{ "type": "loopover"}
+				{ "type": "station", "name": "Авиамоторная", "id": "11-29" }
 			]
 		},
 		{ "name": "Бутовская", "id": "12", "color": "aec5e3",
@@ -346,8 +344,7 @@
 				{ "type": "station", "name": "Соколиная Гора", "id": "14-29" },
 				{ "type": "station", "name": "Перово", "id": "14-30" },
 				{ "type": "station", "name": "Шоссе Энтузиастов", "id": "14-31", "ff": { "noAutoMerge": true } },
-				{ "type": "station", "name": "Андроновка", "id": "14-32" },
-				{ "type": "loopover"}
+				{ "type": "station", "name": "Андроновка", "id": "14-32" }
 			]
 		},
 		{ "name": "Некрасовская", "id": "15", "color": "de99b8",
@@ -410,6 +407,9 @@
 		{ "connections": [ "9-10", "10-12"], "in": "inside" },
 		{ "connections": [ "9-16", "14-7" ], "in": "surface" },
 		{ "connections": [ "9-8", "11-8"], "in": "inside" },
-		{ "connections": [ "10-17", "10-18", "14-4"], "in": "inside" }
+		{ "connections": [ "10-17", "10-18", "14-4"], "in": "inside" },
+		{ "connections": [ "5-1", "5-11" ], "in": "loopover" },
+		{ "connections": [ "11-1", "11-29" ], "in": "loopover" },
+		{ "connections": [ "14-1", "14-32" ], "in": "loopover" }
 	]
 }

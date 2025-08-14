@@ -4,5 +4,12 @@
     "ROUTEINPUT_FILTERS_BUTTON": "Фильтры",
     "ROUTEINPUT_ROUTEME_BUTTON": "Найти путь",
     "ROUTEINPUT_CLEARROUTE_BUTTON": "Очистить",
-    "ROUTEINPUT_SELECTION_NOTICE": "Нажмите на соответствующию иконку для заполнения полей"
+    "ROUTEINPUT_SELECTION_NOTICE": "Нажмите на соответствующию иконку для заполнения полей",
+    "FILTERS_DISABLE_SURFACESWITCHES": "Не выходить наружу",
+    "FILTERS_SAVE_BUTTON": "Сохранить",
+    "FILTERS_CANCEL_BUTTON": "Отмена",
+    "FILTERS_ALERT": "Фильтры сохраняються после перезагрузки страницы. Также, у нас нет оповещений о новых фильтрах, так что проверяйте эту секцию чаще.",
+    "ROUTE_SWITCH_SURFACE": "Пройдите <strong>снаружи</strong> до следующей станции",
+    "ROUTE_SWITCH_INSIDE": "Пройдите <strong>внутри</strong> до следующей станции",
+    "ROUTE_FUCKEDUP": "Trolley не нашел пути к точке назначения. Вы уверены что нажали на обе иконки на нужных станциях?"
 }

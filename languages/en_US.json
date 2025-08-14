@@ -4,5 +4,12 @@
     "ROUTEINPUT_FILTERS_BUTTON": "Filters",
     "ROUTEINPUT_ROUTEME_BUTTON": "Find route",
     "ROUTEINPUT_CLEARROUTE_BUTTON": "Clear",
-    "ROUTEINPUT_SELECTION_NOTICE": "Tap the corresponding icon to fill the input"
+    "ROUTEINPUT_SELECTION_NOTICE": "Tap the corresponding icon to fill the input",
+    "FILTERS_DISABLE_SURFACESWITCHES": "Do not go outside",
+    "FILTERS_SAVE_BUTTON": "Save",
+    "FILTERS_CANCEL_BUTTON": "Cancel",
+    "FILTERS_ALERT": "Filters are being saved after page reload. Also, we dont notify our users when new filters roll out, so check this page frequently.",
+    "ROUTE_SWITCH_SURFACE": "Walk <strong>outside</strong> to the next station",
+    "ROUTE_SWITCH_INSIDE": "Walk <strong>on the inside</strong> to the next station",
+    "ROUTE_FUCKEDUP": "Trolley could not find a way to achieve your destination. Are you sure you filled From and To positions?"
 }

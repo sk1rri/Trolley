@@ -3,8 +3,32 @@
     width: 100%;
 }
 
-#routeInputDisplay {
+#routeInputDisplayGradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     --col1: gray;
     --col2: gray;
     background: linear-gradient(90deg, var(--col1), var(--col2));
+    filter: saturate(1.5) brightness(0.75);
+}
+
+#routeInputDisplay span {
+    z-index: 1;
+}
+
+#routeInputRouteDisplay {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#routeInputRouteDisplay li {
+    --style: solid;
+    --col: gray;
+    border-left: 2px var(--style) var(--col);
+    color: var(--col);
+    padding-left: 0.5rem;
 }
