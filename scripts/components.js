@@ -225,7 +225,7 @@ nr.defineComponent({
             `
         })
         cr.innerHTML = cr_pre
-        cr_pre = nullhtt
+        cr_pre = null
         const roots = {
             inputFrom: document.querySelector('#routeInputFrom'),
             inputTo: document.querySelector('#routeInputTo')
