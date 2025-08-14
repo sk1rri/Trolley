@@ -125,12 +125,19 @@ nr.defineComponent({
 nr.defineComponent({
     name: "routeInput",
     template: `
-        <div id="routeInput-form">
+        <div id="routeInput-form" class="d-flex flex-column">
+            <div class="alert alert-info d-flex gap-2 mb-2">
+                <i class="bi bi-info-circle"></i>
+                <span id="routeInputSelectionNotice"></span>
+            </div>
             <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputFrom" disabled placeholder="---">
             <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputTo" disabled placeholder="---">
-            <div style="margin-left: auto;" class="d-flex gap-2">
-                <button id="routeInputFilters" class="btn btn-outline-secondary" disabled>---</button>
-                <button id="routeInputRouteme" class="btn btn-primary">---</button>
+            <div class="d-flex">
+                <button id="routeInputClear" class="btn btn-outline-danger">---</button>
+                <div style="margin-left: auto;" class="d-flex gap-2">
+                    <button id="routeInputFilters" class="btn btn-outline-secondary" disabled>---</button>
+                    <button id="routeInputRouteme" class="btn btn-primary">---</button>
+                </div>
             </div>
 
         </div>
@@ -149,7 +156,9 @@ nr.defineComponent({
             inputFrom: document.querySelector('#routeInputFrom'),
             inputTo: document.querySelector('#routeInputTo'),
             filters: document.querySelector('#routeInputFilters'),
-            routeme: document.querySelector('#routeInputRouteme')
+            routeme: document.querySelector('#routeInputRouteme'),
+            clearRoute: document.querySelector('#routeInputClear'),
+            routeSelectionNotice: document.querySelector('#routeInputSelectionNotice')
         }
 
         while (true) {
@@ -165,6 +174,19 @@ nr.defineComponent({
         roots.inputTo.placeholder = window.trolley.locales.ROUTEINPUT_TO
         roots.filters.textContent = window.trolley.locales.ROUTEINPUT_FILTERS_BUTTON
         roots.routeme.textContent = window.trolley.locales.ROUTEINPUT_ROUTEME_BUTTON
+        roots.clearRoute.textContent = window.trolley.locales.ROUTEINPUT_CLEARROUTE_BUTTON
+        roots.routeSelectionNotice.textContent = window.trolley.locales.ROUTEINPUT_SELECTION_NOTICE
+
+        roots.clearRoute.addEventListener('click', async () => {
+            roots.clearRoute.innerHTML = '<i class="bi bi-check-lg"></i>'
+
+            roots.inputTo.value = ''
+            roots.inputFrom.value = ''
+
+            setTimeout(() => {
+                roots.clearRoute.textContent = window.trolley.locales.ROUTEINPUT_CLEARROUTE_BUTTON
+            }, 1000)
+        })
     }
 })
 
@@ -190,8 +212,8 @@ nr.defineComponent({
                                         <span>${s.name}</span>
                                         <div style="margin-left: auto;" class="d-flex gap-2 align-items-center">
                                             <span style="transform: scale(0.75)">${s.id}</span>
-                                            <a class="btn btn-primary btn-sm" href="#routeInput-form"><i class="bi bi-crosshair"></i></a>
-                                            <a class="btn btn-secondary btn-sm" href="#routeInput-form"><i class="bi bi-geo"></i></a>
+                                            <a class="btn btn-primary btn-sm" href="#routeInput-form" data-trolley-from="${s.id}"><i class="bi bi-crosshair"></i></a>
+                                            <a class="btn btn-secondary btn-sm" href="#routeInput-form" data-trolley-to="${s.id}"><i class="bi bi-geo"></i></a>
                                         </div>
                                     </li>
                                 `
@@ -200,6 +222,20 @@ nr.defineComponent({
                     </div>
                 </div>
             `
+        })
+        const roots = {
+            inputFrom: document.querySelector('#routeInputFrom'),
+            inputTo: document.querySelector('#routeInputTo')
+        }
+        document.querySelectorAll('[data-trolley-from]').forEach(e => {
+            e.addEventListener('click', () => {
+                roots.inputFrom.value = e.getAttribute('data-trolley-from')
+            })
+        })
+        document.querySelectorAll('[data-trolley-to]').forEach(e => {
+            e.addEventListener('click', () => {
+                roots.inputTo.value = e.getAttribute('data-trolley-to')
+            })
         })
     }
 })

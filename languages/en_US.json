@@ -1,6 +1,8 @@
 {
-    "ROUTEINPUT_FROM": "From? (Tap the 'pin' icon to input)",
-    "ROUTEINPUT_TO": "To? (Tap the 'crosshair' icon to input)",
+    "ROUTEINPUT_FROM": "From?",
+    "ROUTEINPUT_TO": "To?",
     "ROUTEINPUT_FILTERS_BUTTON": "Filters",
-    "ROUTEINPUT_ROUTEME_BUTTON": "Find route"
+    "ROUTEINPUT_ROUTEME_BUTTON": "Find route",
+    "ROUTEINPUT_CLEARROUTE_BUTTON": "Clear",
+    "ROUTEINPUT_SELECTION_NOTICE": "Tap the corresponding icon to fill the input"
 }
