@@ -197,8 +197,9 @@ nr.defineComponent({
     afterCreate: function () {
         if (!window.trolley.map) return
         const cr = document.querySelector('#mapDisplay-accordion')
+        let cr_pre = ''
         window.trolley.map.lines.forEach((l, i) => {
-            cr.innerHTML += `
+            cr_pre += `
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#mapDisplay-line${i}">${l.name} (${l.id})</button>
@@ -223,6 +224,8 @@ nr.defineComponent({
                 </div>
             `
         })
+        cr.innerHTML = cr_pre
+        cr_pre = nullhtt
         const roots = {
             inputFrom: document.querySelector('#routeInputFrom'),
             inputTo: document.querySelector('#routeInputTo')
