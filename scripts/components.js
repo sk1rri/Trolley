@@ -130,8 +130,10 @@ nr.defineComponent({
                 <i class="bi bi-info-circle"></i>
                 <span id="routeInputSelectionNotice"></span>
             </div>
-            <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputFrom" disabled placeholder="---">
-            <input class="form-control mb-2" list="mapStationsDatalist" id="routeInputTo" disabled placeholder="---">
+            <div id="routeInputDisplay" class="card d-flex justify-content-between flex-row mb-2 p-1 px-4">
+                <span id="routeInputFrom">---</span>
+                <span id="routeInputTo">---</span>
+            </div>
             <div class="d-flex">
                 <button id="routeInputClear" class="btn btn-outline-danger">---</button>
                 <div style="margin-left: auto;" class="d-flex gap-2">
@@ -170,8 +172,8 @@ nr.defineComponent({
             await new Promise(resolve => setTimeout(resolve, 100));
         }
         
-        roots.inputFrom.placeholder = window.trolley.locales.ROUTEINPUT_FROM
-        roots.inputTo.placeholder = window.trolley.locales.ROUTEINPUT_TO
+        roots.inputFrom.textContent = window.trolley.locales.ROUTEINPUT_FROM
+        roots.inputTo.textContent = window.trolley.locales.ROUTEINPUT_TO
         roots.filters.textContent = window.trolley.locales.ROUTEINPUT_FILTERS_BUTTON
         roots.routeme.textContent = window.trolley.locales.ROUTEINPUT_ROUTEME_BUTTON
         roots.clearRoute.textContent = window.trolley.locales.ROUTEINPUT_CLEARROUTE_BUTTON
@@ -180,8 +182,10 @@ nr.defineComponent({
         roots.clearRoute.addEventListener('click', async () => {
             roots.clearRoute.innerHTML = '<i class="bi bi-check-lg"></i>'
 
-            roots.inputTo.value = ''
-            roots.inputFrom.value = ''
+            roots.inputFrom.textContent = window.trolley.locales.ROUTEINPUT_FROM
+            roots.inputTo.textContent = window.trolley.locales.ROUTEINPUT_TO
+            document.getElementById('routeInputDisplay').style.setProperty('--col1', 'gray')
+            document.getElementById('routeInputDisplay').style.setProperty('--col2', 'gray')
 
             setTimeout(() => {
                 roots.clearRoute.textContent = window.trolley.locales.ROUTEINPUT_CLEARROUTE_BUTTON
@@ -232,12 +236,14 @@ nr.defineComponent({
         }
         document.querySelectorAll('[data-trolley-from]').forEach(e => {
             e.addEventListener('click', () => {
-                roots.inputFrom.value = e.getAttribute('data-trolley-from')
+                roots.inputFrom.textContent = e.getAttribute('data-trolley-from')
+                document.getElementById('routeInputDisplay').style.setProperty('--col1', `#${window.trolley.map.lines.find(line => line.stations.some(s => s.id === e.getAttribute('data-trolley-from')))?.color}`)
             })
         })
         document.querySelectorAll('[data-trolley-to]').forEach(e => {
             e.addEventListener('click', () => {
-                roots.inputTo.value = e.getAttribute('data-trolley-to')
+                roots.inputTo.textContent = e.getAttribute('data-trolley-to')
+                document.getElementById('routeInputDisplay').style.setProperty('--col2', `#${window.trolley.map.lines.find(line => line.stations.some(s => s.id === e.getAttribute('data-trolley-to')))?.color}`)
             })
         })
     }

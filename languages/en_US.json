@@ -1,6 +1,6 @@
 {
-    "ROUTEINPUT_FROM": "From?",
-    "ROUTEINPUT_TO": "To?",
+    "ROUTEINPUT_FROM": "From",
+    "ROUTEINPUT_TO": "To",
     "ROUTEINPUT_FILTERS_BUTTON": "Filters",
     "ROUTEINPUT_ROUTEME_BUTTON": "Find route",
     "ROUTEINPUT_CLEARROUTE_BUTTON": "Clear",

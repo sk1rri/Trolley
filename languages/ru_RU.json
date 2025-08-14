@@ -1,6 +1,6 @@
 {
-    "ROUTEINPUT_FROM": "Откуда?",
-    "ROUTEINPUT_TO": "Куда?",
+    "ROUTEINPUT_FROM": "Откуда",
+    "ROUTEINPUT_TO": "Куда",
     "ROUTEINPUT_FILTERS_BUTTON": "Фильтры",
     "ROUTEINPUT_ROUTEME_BUTTON": "Найти путь",
     "ROUTEINPUT_CLEARROUTE_BUTTON": "Очистить",

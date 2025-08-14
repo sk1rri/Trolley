@@ -2,3 +2,9 @@
     max-width: 30rem;
     width: 100%;
 }
+
+#routeInputDisplay {
+    --col1: gray;
+    --col2: gray;
+    background: linear-gradient(90deg, var(--col1), var(--col2));
+}
