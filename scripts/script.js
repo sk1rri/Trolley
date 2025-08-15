@@ -22,16 +22,18 @@ window.routeMe = function (map, from, to) {
 
 	map.merges.forEach(merge => {
 		const connections = merge.connections
-		for (let i = 0; i < connections.length; i += 2) {
+		for (let i = 0; i < connections.length; i++) {
 			const stationA = connections[i]
-			const stationB = connections[i + 1]
-			if (graph.has(stationA) && graph.has(stationB)) {
-				graph.get(stationA).connections.push({ id: stationB, type: merge.in, by: "mapMerge" })
-				graph.get(stationB).connections.push({ id: stationA, type: merge.in, by: "mapMerge" })
+			for (let j = i + 1; j < connections.length; j++) {
+				const stationB = connections[j]
+				if (graph.has(stationA) && graph.has(stationB)) {
+					graph.get(stationA).connections.push({ id: stationB, type: merge.in, by: "mapMerge" })
+					graph.get(stationB).connections.push({ id: stationA, type: merge.in, by: "mapMerge" })
+				}
 			}
 		}
 	})
-
+	
 	map.lines.forEach(line => {
 		const stations = line.stations.map(station => station.id)
 		for (let i = 0; i < stations.length - 1; i++) {
