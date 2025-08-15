@@ -88,15 +88,16 @@
 		},
 		{ "name": "Филёвская", "id": "4", "color": "5cc4f2",
 			"stations": [
-				{ "type": "station", "name": "Пионерская", "id": "4-1" },
-				{ "type": "station", "name": "Филёвский парк", "id": "4-2" },
-				{ "type": "station", "name": "Багротионовская", "id": "4-3" },
-				{ "type": "station", "name": "Фили", "id": "4-4" },
-				{ "type": "station", "name": "Кутузовская", "id": "4-5" },
-				{ "type": "station", "name": "Киевская", "id": "4-6" },
-				{ "type": "station", "name": "Смоленская", "id": "4-7" },
-				{ "type": "station", "name": "Арбатская", "id": "4-8" },
-				{ "type": "station", "name": "Александровский сад", "id": "4-9" }
+				{ "type": "station", "name": "Кунцевская", "id": "4-1" },
+				{ "type": "station", "name": "Пионерская", "id": "4-2" },
+				{ "type": "station", "name": "Филёвский парк", "id": "4-3" },
+				{ "type": "station", "name": "Багротионовская", "id": "4-4" },
+				{ "type": "station", "name": "Фили", "id": "4-5" },
+				{ "type": "station", "name": "Кутузовская", "id": "4-6" },
+				{ "type": "station", "name": "Киевская", "id": "4-7" },
+				{ "type": "station", "name": "Смоленская", "id": "4-8" },
+				{ "type": "station", "name": "Арбатская", "id": "4-9" },
+				{ "type": "station", "name": "Александровский сад", "id": "4-10" }
 			]
 		},
 		{ "name": "Филёвская", "id": "4а", "color": "5cc4f2",
@@ -175,7 +176,7 @@
 				{ "type": "station", "name": "Котельники", "id": "7-22" }
 			]
 		},
-		{ "name": "Калининская", "id": "8", "color": "7e619d",
+		{ "name": "Калининская", "id": "8", "color": "fbcf0b",
 			"stations": [
 				{ "type": "station", "name": "Третьяковская", "id": "8-1" },
 				{ "type": "station", "name": "Марксистская", "id": "8-2" },
@@ -187,7 +188,7 @@
 				{ "type": "station", "name": "Новокосино", "id": "8-8" }
 			]
 		},
-		{ "name": "Солнцевская", "id": "8а", "color": "7e619d",
+		{ "name": "Солнцевская", "id": "8а", "color": "fbcf0b",
 			"stations": [
 				{ "type": "station", "name": "Аэропорт Внуково", "id": "8а-1" },
 				{ "type": "station", "name": "Пыхтино", "id": "8а-2" },

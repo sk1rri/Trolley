@@ -32,3 +32,12 @@
     color: var(--col);
     padding-left: 0.5rem;
 }
+
+div.accordion-item h2:nth-child(1) button:nth-child(1) i:nth-child(1) {
+    transform: scale(0.7);
+}
+
+i.bir {
+    --col: white;
+    color: var(--col) ;
+}

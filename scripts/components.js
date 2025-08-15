@@ -262,14 +262,14 @@ nr.defineComponent({
             cr_pre += `
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#mapDisplay-line${i}">${l.name} (${l.id})</button>
+                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#mapDisplay-line${i}"><i class="bi bi-circle-fill me-3 bir" style="--col: #${l.color};"></i>${l.name} (${l.id})</button>
                     </h2>
                     <div id="mapDisplay-line${i}" class="accordion-collapse collapse">
                         <ul class="list-group list-group-flush">
                             ${l.stations.map((s) => {
                                 return `
                                     <li class="list-group-item d-flex w-100 align-items-center">
-                                        <i class="bi bi-geo-alt me-3"></i>
+                                        <i class="bi bi-geo-alt me-3 bir" style="--col: #${l.color}"></i>
                                         <span>${s.name}</span>
                                         <div style="margin-left: auto" class="d-flex gap-2 align-items-center">
                                             <span style="transform: scale(0.75)">${s.id}</span>
